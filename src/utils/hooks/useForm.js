@@ -10,6 +10,7 @@ const useForm = (initialValues) => {
             [name]: value
         })
     }
+    return [formValues, handleChange]
 }
 
 export default useForm

@@ -9,9 +9,11 @@ const PetsPage = ({ pets, isFetching, errors }) => {
             <div className='pets-container'>
                 {
                     pets?.map((pet) => {
-                        const { name, photos , description} = pet
+                        const { id, name, photos, description } = pet
+                        console.log(id)
+                        let photo = photos[0]?.large || 'Some cute photo'
                         console.log(name)
-                        return <Pet name={name} photos={photos} description={description}></Pet>
+                        return <Pet key={id} id={id} name={name} photo={photo} description={description}></Pet>
                     })
                 }
             </div>

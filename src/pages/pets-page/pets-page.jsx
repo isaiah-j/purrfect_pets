@@ -10,9 +10,7 @@ const PetsPage = ({ pets, isFetching, errors }) => {
                 {
                     pets?.map((pet) => {
                         const { id, name, photos, description } = pet
-                        console.log(id)
                         let photo = photos[0]?.large || 'Some cute photo'
-                        console.log(name)
                         return <Pet key={id} id={id} name={name} photo={photo} description={description}></Pet>
                     })
                 }

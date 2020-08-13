@@ -8,6 +8,8 @@ import MorePetInfo from './components/more-pet-info/more-pet-info'
 
 
 function App() {
+  // god forgive my code
+  let photo = 'randomphoto'
   return (
     <div className="App">
       <Switch>
@@ -16,7 +18,7 @@ function App() {
         <Route exact path='/pets/info' component={FormPage}></Route>
         <Route exact path='/pets/:id' component={(props) => {
           let {id} = props.match.params
-          return <MorePetInfo id={id}></MorePetInfo>
+          return <MorePetInfo id={id} photo={photo}></MorePetInfo>
         }}></Route>
       </Switch>
     </div>

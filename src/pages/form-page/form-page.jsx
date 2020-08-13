@@ -3,39 +3,46 @@ import './form-page.styles.scss'
 
 import useForm from '../../utils/hooks/useForm'
 import useStep from '../../utils/hooks/useStep'
-
+import { useHistory } from 'react-router-dom'
 import First from '../../components/form-page-components/first'
 import Second from '../../components/form-page-components/second'
 import Third from '../../components/form-page-components/third'
+import { getPets } from '../../redux/actions'
+import { connect } from 'react-redux'
 
 const INITIAL_VALUES = {
-    location: '',
-    type: [],
-    breed: [],
-    age: ''
+    location: 'TX',
+    type: 'dog',
+    breed: 'pitbull',
+    size: 'medium'
 }
 
-const FormPage = () => {
+const FormPage = (props) => {
     // setup form state and "step" state to determine which form to render
     // Create each form component and render them based off the value of step
     // make sure all of the forms are handling the same form state
     const [formValues, handleChange] = useForm(INITIAL_VALUES)
     const [step, setStep, prevStep, nextStep] = useStep(1)
-    console.log(step)
+    let history = useHistory()
+
 
     const handleSubmit = () => {
         // Send an action that queries for the adopted animals using the form values
         // console.log(formValues)
-        console.log('Submitted')
+        history.push('/pets')
+        props.getPets(formValues)
     }
     switch (step) {
         case 1:
-            return <First step={step} handleChange={handleChange} nextStep={nextStep}></First>
+            return <First formValues={formValues} step={step} handleChange={handleChange} nextStep={nextStep}></First>
         case 2:
-            return <Second handleChange={handleChange} nextStep={nextStep} prevStep={prevStep}></Second>
+            return <Second formValues={formValues} handleChange={handleChange} nextStep={nextStep} prevStep={prevStep} handleSubmit={handleSubmit}></Second>
         case 3:
-            return <Third handleChange={handleChange} prevStep={prevStep} handleSubmit={handleSubmit}></Third>
+            return <Third formValues={formValues} handleChange={handleChange} prevStep={prevStep} handleSubmit={handleSubmit}></Third>
     }
 }
 
-export default FormPage
+const mapStateToProps = () => {
+    return { worked: true }
+}
+export default connect(mapStateToProps, { getPets })(FormPage)

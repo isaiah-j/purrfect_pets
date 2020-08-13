@@ -1,10 +1,25 @@
 import React from 'react'
 import './pets-page.styles.scss'
+import { connect } from 'react-redux'
+import Pet from '../../components/Pet/Pet'
 
-const PetsPage = () => {
+const PetsPage = ({ pets, isFetching, errors }) => {
     return (
-        <h1>Welcome to the pets page!</h1>
+        <div className="container">
+            <div className='pets-container'>
+                {
+                    pets?.map((pet) => {
+                        const { name, photos , description} = pet
+                        console.log(name)
+                        return <Pet name={name} photos={photos} description={description}></Pet>
+                    })
+                }
+            </div>
+        </div>
     )
 }
 
-export default PetsPage
+const mapStateToProps = state => {
+    return { pets: state.pets.pets, isFetching: state.pets.isFetching, errors: state.pets.errors }
+}
+export default connect(mapStateToProps, {})(PetsPage)

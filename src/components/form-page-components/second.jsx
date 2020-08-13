@@ -1,19 +1,18 @@
 import React from 'react'
 import { TextField, Button } from '@material-ui/core'
-
 import './form.styles.scss'
 
-const Second = ({nextStep, prevStep}) => {
+const Second = ({ nextStep, prevStep, handleChange, handleSubmit }) => {
     return (
         <form>
             <div className='form-fields'>
-                <TextField id="standard-basic" label="Standard" />
-                <TextField id="filled-basic" label="Filled" />
-                <TextField id="outlined-basic" label="Outlined" />
+                <TextField onChange={handleChange} label='age' id="standard-basic" name='age' />
+                <TextField onChange={handleChange} id="filled-basic" label="size" name='size' />
+                <TextField onChange={handleChange} id="outlined-basic" label="color" name='color' />
             </div>
-            <div className='navigation-buttons'>
+            <div className='navigation-buttons-submit'>
+                <Button color='primary' onClick={handleSubmit} variant='outlined'>Submit</Button>
                 <Button color='default' onClick={prevStep}>Back</Button>
-                <Button color='secondary' onClick={nextStep}>Continue</Button>
             </div>
         </form>
     )

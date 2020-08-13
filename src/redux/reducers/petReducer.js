@@ -11,7 +11,8 @@ export const petReducer = (state = INITIAL_STATE, action) => {
         case 'GET_PET':
             return {
                 ...state,
-                pet: action.payload
+                pet: action.payload,
+                isFetching: false
             }
             return state
         default:
